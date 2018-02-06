@@ -35,8 +35,13 @@ public class Aposta {
 		return nomeApostador + " - R$"  + this.getValorAposta() + " - " + previsao;
 				
 	}
-	
-		
+
+
+	public String getPrevisao() {
+		return previsao;
+	}
+
+
 	
 	
 }

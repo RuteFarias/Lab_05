@@ -80,17 +80,19 @@ public class Cenario {
 		
 				
 	}
-//	public String previsaoCenario() {
-	//	for (Aposta aposta : apostas) {
-		//	if(aposta.getPrevisao() == "VAI ACONTECER" && this.estado == ocorreu) {
-				
-			//}
-			//if(aposta.getPrevisao() == "N VAI ACONTECER" && this.estado == nOcorreu) {
-				//return 
-			//}
+	public int valorApostasPerdedoras() {
+		int valor = 0;
+		for (Aposta aposta : apostas) {
+			if(aposta.getPrevisao() == "VAI ACONTECER" && this.estado == nOcorreu) {
+				valor += aposta.getValorAposta();
+			}
+			else if(aposta.getPrevisao() == "N VAI ACONTECER" && this.estado == ocorreu) {
+				valor += aposta.getValorAposta();
+			}
 			
-		//}
-	//}
+		}
+		return valor;
+	}
 	
 	
 	

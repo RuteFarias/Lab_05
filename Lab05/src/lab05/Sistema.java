@@ -145,9 +145,17 @@ public class Sistema {
 			}
 		}
 		
-
+	}
+	public int getCaixaCenario(int cenario) {
+		double valor = Math.floor(buscaCenario(cenario).valorApostasPerdedoras() * this.taxa);
+		this.caixa += (int) valor;
+		return (int) valor;
 	}
 	
+	public int getTotalRateioCenario(int cenario) {
+		double valor = Math.floor(buscaCenario(cenario).valorApostasPerdedoras() * this.taxa);
+		return buscaCenario(cenario).valorApostasPerdedoras() - (int) valor;
+	}
 	
 		
 	}
