@@ -26,7 +26,7 @@ public class Aposta {
 	
 	
 	public double getValorAposta() {
-		double valorAposta = this.valorAposta / 100.0;
+		double valorAposta = this.valorAposta;
 		return valorAposta;
 	}
 

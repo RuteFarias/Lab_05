@@ -7,6 +7,10 @@ public class CenarioTest {
 	
 	Cenario cenario;
 	
+	@org.junit.Before
+	public void Before() throws Exception {
+		cenario = new Cenario("Cenario1");
+	}
 	
 	@Test
 	public void criarCenario() throws Exception {

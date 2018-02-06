@@ -54,7 +54,8 @@ public class Cenario {
 		return identificacao;
 	}
 	
-	public void cadastrarAposta(String apostador, int valor, String previsao) {
+	public void cadastrarAposta(String apostador, int valor, String previsao) {		
+		
 		Aposta aposta = new Aposta(apostador, valor, previsao);
 		this.apostas.add(aposta);
 	}
