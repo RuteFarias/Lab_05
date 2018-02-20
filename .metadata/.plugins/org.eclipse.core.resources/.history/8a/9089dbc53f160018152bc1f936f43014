@@ -1,0 +1,65 @@
+package lab05;
+
+import easyaccept.EasyAccept;
+
+public class Facade {
+	
+	public static void main(String[] args) throws Exception {
+		Sistema s = new Sistema();
+		s.cadastrarAposta(0, "aaa", 122, "aaaaa");
+//		args = new String[] {"lab05.Facade", "acceptance_test/us1_test.txt", "acceptance_test/us2_test.txt", "acceptance_test/us3_test.txt", "acceptance_test/us4_test.txt", "acceptance_test/us5_test.txt", "acceptance_test/us6_test.txt"};
+//		EasyAccept.main(args);
+			    }
+	
+	// Atributos
+
+	private Sistema sistema;
+	
+	// Construtor
+	
+	public Facade() {
+		this.sistema = new Sistema();
+	}
+	
+	public void inicializa(int caixa, double taxa) throws Exception {
+		sistema.inicializa(caixa, taxa);
+	}
+	
+	public int getCaixa() {
+		return sistema.getCaixa();
+	}
+	public int cadastrarCenario(String descricao) throws Exception {
+		return sistema.cadastrarCenario(descricao);
+	}
+	public String exibirCenario(int cenario) throws Exception {
+		return sistema.exibirCenario(cenario);
+	}
+	public String exibirCenarios() throws Exception {
+		return sistema.exibirCenarios();
+	}
+	public void cadastrarAposta(int cenario, String apostador, int valor, String previsao) throws Exception{
+		sistema.cadastrarAposta(cenario, apostador, valor, previsao);
+	}
+	public int valorTotalDeApostas(int cenario) throws Exception{
+		return sistema.valorTotalDeApostas(cenario);
+	}
+	public int totalDeApostas(int cenario) throws Exception{
+		return sistema.totalDeApostas(cenario);
+	}
+	public String exibeApostas(int cenario) throws Exception{
+		return sistema.exibeApostas(cenario);
+	}
+	public void fecharAposta(int cenario, boolean ocorreu) throws Exception {
+		sistema.fecharAposta(cenario, ocorreu);
+	}
+	public int getCaixaCenario(int cenario) throws Exception{
+		return sistema.getCaixaCenario(cenario);
+	}
+	public int getTotalRateioCenario(int cenario) throws Exception{
+		return sistema.getTotalRateioCenario(cenario);
+	}
+	public int cadastrarCenario(String descricao, int bonus) throws Exception {
+		return sistema.cadastrarCenario(descricao, bonus);
+	}
+}
+

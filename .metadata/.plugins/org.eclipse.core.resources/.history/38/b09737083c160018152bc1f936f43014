@@ -1,0 +1,192 @@
+package lab05;
+
+import java.util.ArrayList;
+
+/**
+ *Sistema de Apostas que possui um caixa inicial, onde estao cadastrados os cenarios de apostas.
+ * O sistema inicializa com um valor de caixa(em centavos) e um valor de taxa que nao muda durante a execucao.
+ *
+ * @author Rute Farias
+ *
+ */
+
+public class Sistema {
+	
+	private static final String NL = System.lineSeparator(); 
+	
+	private int caixa;
+	private double taxa;
+	private ArrayList<Cenario> cenarios;
+	
+	
+	/**
+	 * Constroi um sistema de apostas e inicializa um arraylist de cenarios.	
+	 */
+	public Sistema() {
+		this.cenarios = new ArrayList<>();
+		
+	}
+	
+	/**
+	 * Inicializa um sistema a partir do caixa e da taxa.
+	 * @param caixa valor em centavos(int) passados sem pontos.
+	 * @param taxa double.
+	 * @throws Exception excecao caso o valor do caixa ou taxa forem negativos.
+	 */
+	public void inicializa(int caixa, double taxa) throws Exception {
+		
+		if(caixa < 0) {
+			throw new Exception("Erro na inicializacao: Caixa nao pode ser inferior a 0");
+		}
+		if(taxa < 0) {
+			throw new Exception("Erro na inicializacao: Taxa nao pode ser inferior a 0");
+		}
+		
+		this.caixa = caixa;
+		this.taxa = taxa;
+				
+	} 
+
+	public int getCaixa() {
+		return caixa;
+	}
+	
+	/**
+	 * Cadastra um cenario a partir de uma descricao que acontecera ou nao no futuro.
+	 * @param descricao String, descreve uma aposta(frase).
+	 * @return o retorno eh a numeracao do cenario.
+	 * @throws Exception excecao caso a descricao do cenario seja vazia.
+	 */
+	
+	public int cadastrarCenario(String descricao) throws Exception {
+		int identificacao = cenarios.size() + 1;
+		Cenario cenario = new Cenario(descricao);
+		cenario.setIdentificacao(identificacao);
+		cenarios.add(cenario);
+		return identificacao;
+	
+}
+	/**
+	 * Retorna uma String a partir da numeracao do cenario cadastrado.
+	 * @param cenario numeracao do cenario.
+	 * @return o retorno eh uma String do cenario desejado com o formato: identificacao  -  descricao - estado
+	 * @throws Exception excecao caso a identificacao do cenario seja negativa ou nao esteja cadastrado.
+	 */
+	
+	public String exibirCenario(int cenario) throws Exception{
+		
+		if(cenario < 0 ) {
+			throw new Exception("Erro na consulta de cenario: Cenario invalido"); 
+		}
+		if( cenario > this.cenarios.size()) {
+			throw new Exception("Erro na consulta de cenario: Cenario nao cadastrado");     
+		}
+		
+		return cenarios.get(cenario-1).toString();
+		
+	}
+	
+	/**
+	 * Retorna uma String com todos os cenarios cadastrados, listados um abaixo do outro.
+	 * @return o retorno eh uma String com o formato: identificacao  -  descricao - estado \n identificacao  -  descricao - estado...
+	 * @throws Exception excecao caso nenhum cenario esteja cadastrado.
+	 */
+	
+	public String exibirCenarios() throws Exception {
+		
+		if(this.cenarios.size() == 0) {
+			throw new Exception("Nenhum cenario cadastrado");
+		}
+		String retorno = "";
+		
+		for (Cenario cenario : cenarios) {
+			retorno += cenario.toString() + NL;
+		
+		}
+		return retorno.trim();
+			
+		}
+	
+	private Cenario buscaCenario(int idCenario) {
+
+		for (Cenario cenario : cenarios) {
+			if(cenario.getIdentificacao() == idCenario) {
+				return cenario;
+			}
+		 
+		}
+	return null;
+	}
+	
+	
+	
+	public void cadastrarAposta(int cenario, String apostador, int valor, String previsao) throws Exception{
+		
+		
+		if(buscaCenario(cenario) == null) {
+			throw new Exception("Erro no cadastro de aposta: Cenario nao cadastrado");
+		}
+		if(cenario <= 0) {
+			throw new Exception("Erro no cadastro de aposta: Cenario invalido");
+		}
+		
+		buscaCenario(cenario).cadastrarAposta(apostador, valor, previsao);
+	}
+	
+	public int valorTotalDeApostas(int cenario) {
+		return buscaCenario(cenario).valorTotalDeApostas(cenario);
+	}
+		
+	
+	public int totalDeApostas(int cenario) {
+		return buscaCenario(cenario).totalDeApostas(cenario);
+	}
+	
+	public String exibeApostas(int cenario) {
+		return buscaCenario(cenario).exibeApostas(cenario);
+	}
+	
+	
+	public void fecharAposta(int cenario, boolean ocorreu) {
+		for (Cenario cenario1 : cenarios) {
+			if(cenario1.getIdentificacao() == cenario) {
+				cenario1.fecharAposta(ocorreu);
+				
+			}
+		}
+		
+	}
+	public int getCaixaCenario(int cenario) {
+		double valor = Math.floor(buscaCenario(cenario).valorApostasPerdedoras() * this.taxa);
+		this.caixa += (int) valor;
+		return (int) valor;
+	}
+	
+	public int getTotalRateioCenario(int cenario) {
+		double valor = Math.floor(buscaCenario(cenario).valorApostasPerdedoras() * this.taxa);
+		return buscaCenario(cenario).valorApostasPerdedoras() - (int) valor + buscaCenario(cenario).getBonus();
+	}
+	
+	public int cadastrarCenario(String descricao, int bonus) throws Exception {
+		int identificacao = cenarios.size() + 1;
+		Cenario cenario = new CenarioBonus(descricao, bonus);
+		cenarios.add(cenario);
+		this.caixa -= bonus;
+		cenario.setIdentificacao(identificacao);
+		return cenario.getIdentificacao();
+				
+			
+		}
+	
+	
+		
+	}
+	
+	
+	
+
+	
+	
+	
+
+

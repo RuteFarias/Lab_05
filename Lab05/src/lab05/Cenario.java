@@ -14,6 +14,8 @@ public class Cenario {
 	
 	private static final String ocorreu = "Finalizado (ocorreu)";
 	private static final String nOcorreu = "Nao finalizado (n ocorreu)";
+	
+	
 
 	
 	
@@ -54,7 +56,8 @@ public class Cenario {
 		return identificacao;
 	}
 	
-	public void cadastrarAposta(String apostador, int valor, String previsao) {		
+	public void cadastrarAposta(String apostador, int valor, String previsao) throws Exception{	
+		
 		
 		Aposta aposta = new Aposta(apostador, valor, previsao);
 		this.apostas.add(aposta);
@@ -94,9 +97,27 @@ public class Cenario {
 		}
 		return valor;
 	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
 	
-	
-	
+	public int getBonus(){
+		return 0;
+		
+	}
 		
 	}
 

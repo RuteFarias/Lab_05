@@ -1,0 +1,60 @@
+package lab05;
+
+import java.util.ArrayList;
+
+public class Cenario {
+
+	// atributos
+	
+	private int identificacao;
+	private String descricao;
+	private String estado;
+	
+	private ArrayList<Aposta> aposta;
+	
+	private static final String ocorreu = "Finalizado (ocorreu)";
+	private static final String nOcorreu = "Nao finalizado (n ocorreu)";
+
+	
+	
+	// Construtor
+
+	public Cenario(String descricao) throws Exception{
+		
+		if(descricao.trim().equals("")) {
+			throw new IllegalArgumentException("Erro no cadastro de cenario: Descricao nao pode ser vazia");
+		}
+				
+		
+		this.identificacao = 1;
+		this.descricao = descricao;
+		this.estado = "Nao finalizado";
+		this.aposta = new ArrayList<>();
+
+	}
+
+	@Override
+	public String toString() { 
+		
+		return identificacao + " - " + descricao + " - " + estado;
+	}
+
+	public void setIdentificacao(int identificacao) {
+		this.identificacao = identificacao;
+	}
+	
+	public void fecharAposta(boolean aconteceu) {
+		if(aconteceu == true) {
+			this.estado = ocorreu;
+		}
+		this.estado = nOcorreu;
+	}
+
+	public int getIdentificacao() {
+		return identificacao;
+	}
+	
+		
+	}
+
+	

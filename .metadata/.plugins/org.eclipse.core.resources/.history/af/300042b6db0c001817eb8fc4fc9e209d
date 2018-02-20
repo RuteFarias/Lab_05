@@ -1,0 +1,58 @@
+package lab05;
+
+public class Aposta {
+	
+	// Atributos
+	
+	private String nomeApostador;
+	private int valorAposta;
+	private String previsao ;
+	
+	// Construtor
+	
+	public Aposta(String nomeApostador, int valorAposta, String aposta) throws Exception{
+		
+		if(nomeApostador.trim() == ("")) {
+			throw new IllegalArgumentException("Erro no cadastro de aposta: Apostador nao pode ser vazio ou nulo");
+		}
+		if(nomeApostador == null) {
+			throw new NullPointerException("Erro no cadastro de aposta: Apostador nao pode ser vazio ou nulo");
+		}
+		if(valorAposta <= 0) {
+			throw new Exception("Erro no cadastro de aposta: Valor nao pode ser menor ou igual a zero");
+		}
+			
+		this.nomeApostador = nomeApostador;
+		this.valorAposta = valorAposta;
+		this.previsao = aposta;
+		
+		
+	}
+	
+	
+	//private String getValorAposta() {
+      //  double valorAposta = this.valorAposta / 100.0;
+        //return "R$" + Double.toString(valorAposta);
+    //}
+	
+	
+	public double getValorAposta() {
+		double valorAposta = this.valorAposta;
+		return valorAposta;
+	}
+
+	@Override
+	public String toString() {
+		return nomeApostador + " - R$"  + this.getValorAposta() + " - " + previsao;
+				
+	}
+
+
+	public String getPrevisao() {
+		return previsao;
+	}
+
+
+	
+	
+}

@@ -10,7 +10,20 @@ public class Aposta {
 	
 	// Construtor
 	
-	public Aposta(String nomeApostador, int valorAposta, String aposta) {
+	@SuppressWarnings("unused")
+	public Aposta(String nomeApostador, int valorAposta, String aposta) throws Exception{
+		
+		if(nomeApostador.trim() == ("")) {
+			throw new IllegalArgumentException("Erro no cadastro de aposta: Apostador nao pode ser vazio ou nulo");
+		}
+		if(nomeApostador == null) {
+			throw new NullPointerException("Erro no cadastro de aposta: Apostador nao pode ser vazio ou nulo");
+		}
+		if(valorAposta <= 0) {
+			throw new Exception("Erro no cadastro de aposta: Valor nao pode ser menor ou igual a zero");
+		}
+	
+			
 		this.nomeApostador = nomeApostador;
 		this.valorAposta = valorAposta;
 		this.previsao = aposta;

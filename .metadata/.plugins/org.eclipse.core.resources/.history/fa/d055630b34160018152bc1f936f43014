@@ -1,0 +1,23 @@
+package lab05;
+
+public class CenarioBonus extends Cenario {
+	
+	private int bonus;
+
+	public CenarioBonus(String descricao, int bonus) throws Exception {
+		super(descricao);
+		this.bonus = bonus;
+	}
+
+	public int cadastrarCenario(String descricao) throws Exception {
+		Cenario cenario = new CenarioBonus(descricao, bonus);
+		
+				
+		//cenarios.add(cenario);
+		//return ;
+	
+}
+	
+	
+	
+}
